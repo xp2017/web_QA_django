@@ -1,0 +1,50 @@
+{% load staticfiles %}
+{% load thumbnail %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+<body>
+    <div id="header">
+        <span class="logo">问答</span>
+        {% if request.user.is_authenticated %}
+        <ul class="menu">
+            <li {% if section == "首页" %}class="selected"{% endif %}><a href="{% url "question:question_list" %}">首页</a></li>
+            <li {% if section == "热门" %}class="selected"{% endif %}><a href="{% url "question:question_hot" %}">热门</a></li>
+            <li {% if section == "提问" %}class="selected"{% endif %}><a href="{% url "question:question_post" %}">提问</a></li>
+            <li {% if section == "文章" %}class="selected"{% endif %}><a href="{% url "question:article_list" %}">文章</a></li>
+            <li {% if section == "写文章" %}class="selected"{% endif %}><a href="{% url "question:article_post" %}">写文章</a></li>
+            <form action="search/" method="get">
+                <li><input type="text" class="" name="q" placeholder="搜索感兴趣的内容"></li>
+                <li><input type="submit" class="" name="" value="搜索"></li>
+            </form>
+        </ul>
+        {% endif %}
+
+        <span class="user">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'Account:user_detail' username=request.user.username %}">{{ request.user.username }}</a>
+                <!--<img src="{{ MEDIA_URL }}{{ request.user.profile.photo.url }}" alt="无法显示">-->
+                {% thumbnail request.user.profile.photo "50" as im %}
+                    <a href="{% url 'Account:user_detail' username=request.user.username %}">
+                        <img src="{{ im.url }}" class="" alt="无法显示">
+                    </a>
+                {% endthumbnail %}
+
+            {% endif %}
+        </span>
+
+    </div>
+
+
+
+    <div id="content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

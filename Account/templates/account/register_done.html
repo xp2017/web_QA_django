@@ -1,0 +1,4 @@
+{% block content %}
+    <h1>注册成功，{{ new_user.username }}</h1>
+    <p><a href="{% url 'Account:login' %}">登录</a></p>
+{% endblock %}

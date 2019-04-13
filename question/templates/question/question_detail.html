@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>
+        <a>
+            {{ question.title|linebreaks}}
+        </a>
+
+    </h2>
+
+    <div>
+        被浏览{{ total_view }}
+    </div>
+
+
+    {% with comments.count as total_comments %}
+        <h4>
+            {% if total_comments %}
+                {{ total_comments }}条评论
+
+            {% else %}
+                暂无评论
+            {% endif %}
+        </h4>
+    {% endwith %}
+
+    {% if new_comment %}
+        <h2>success</h2>
+    {% else %}
+    <form action="/question/{{ question.id }}" method="post">
+        {{ comment_form.media }}
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="添加评论"></p>
+    </form>
+    {% endif %}
+
+    {% for comment in comments %}
+          <a>
+            {{ comment.answer|linebreaks}}
+          </a>
+        <h5>
+            {{ comment.created }}
+        </h5>
+    {% endfor %}
+
+{% endblock %}

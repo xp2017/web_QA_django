@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}首页{% endblock %}
+{% block content %}
+    {% for question in questions %}
+        <h2>
+            <a href="{{ question.get_absolute_url }}">
+               {{ question.title }}
+            </a>
+        </h2>
+    {% endfor %}
+
+{% endblock %}

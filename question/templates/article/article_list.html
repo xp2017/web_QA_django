@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}文章页{% endblock %}
+{% block content %}
+    {% for article in articles %}
+        <h2>
+            <a href="{{ article.get_absolute_url }}">
+               {{ article.title }}
+                {{ article.article|truncatewords:60|linebreaks }}
+            </a>
+        </h2>
+    {% endfor %}
+
+{% endblock %}

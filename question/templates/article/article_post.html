@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>写文章</h1>
+    {% if new_article %}
+        <h2>成功</h2>
+    {% else %}
+    <form action="./article" method="post" novalidate>
+
+        {{ article_form.as_p }}
+        {{ article_form.media }}
+        {% csrf_token %}
+        <p><input type="submit" value="保存提交"></p>
+    </form>
+    {% endif %}
+{% endblock %}
