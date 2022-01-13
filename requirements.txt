@@ -46,7 +46,7 @@ Markdown==2.6.8
 MarkupSafe==1.0
 parsel==1.4.0
 pefile==2017.11.5
-Pillow==5.1.0
+Pillow==9.0.0
 psycopg2==2.7.3
 pyasn1==0.4.2
 pyasn1-modules==0.2.1
